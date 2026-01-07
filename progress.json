@@ -1,0 +1,1395 @@
+{
+  "project": "echo-lab",
+  "version": "1.0.0",
+  "last_updated": null,
+  "current_phase": 0,
+  "current_task": null,
+  "overall_status": "not_started",
+  "phases": [
+    {
+      "id": 0,
+      "name": "Monorepo Scaffolding",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "0.1",
+          "name": "Initialize pnpm workspace",
+          "status": "not_started",
+          "description": "Create pnpm-workspace.yaml with apps/* and packages/* globs",
+          "files_to_create": ["pnpm-workspace.yaml"],
+          "verifications": [
+            {
+              "id": "0.1.1",
+              "description": "pnpm-workspace.yaml exists with correct content",
+              "command": "cat pnpm-workspace.yaml",
+              "expected": "contains 'apps/*' and 'packages/*'",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.2",
+          "name": "Create root package.json",
+          "status": "not_started",
+          "description": "Root package.json with workspace scripts (dev, build, typecheck)",
+          "files_to_create": ["package.json"],
+          "verifications": [
+            {
+              "id": "0.2.1",
+              "description": "package.json has workspace scripts",
+              "command": "cat package.json | grep -E '(dev|build|typecheck)'",
+              "expected": "shows dev, build, typecheck scripts",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.3",
+          "name": "Create TypeScript base config",
+          "status": "not_started",
+          "description": "Shared tsconfig.base.json with strict settings, ES2022 target",
+          "files_to_create": ["tsconfig.base.json"],
+          "verifications": [
+            {
+              "id": "0.3.1",
+              "description": "tsconfig.base.json exists with strict mode",
+              "command": "cat tsconfig.base.json | grep strict",
+              "expected": "strict: true",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.4",
+          "name": "Create apps/api package",
+          "status": "not_started",
+          "description": "Initialize apps/api with package.json and tsconfig.json extending base",
+          "files_to_create": ["apps/api/package.json", "apps/api/tsconfig.json", "apps/api/src/index.ts"],
+          "verifications": [
+            {
+              "id": "0.4.1",
+              "description": "apps/api/package.json exists with name @echo-lab/api",
+              "command": "cat apps/api/package.json | grep name",
+              "expected": "@echo-lab/api",
+              "status": "not_started"
+            },
+            {
+              "id": "0.4.2",
+              "description": "apps/api/tsconfig.json extends base",
+              "command": "cat apps/api/tsconfig.json | grep extends",
+              "expected": "../../tsconfig.base.json",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.5",
+          "name": "Create apps/web package",
+          "status": "not_started",
+          "description": "Initialize apps/web with package.json and tsconfig.json extending base",
+          "files_to_create": ["apps/web/package.json", "apps/web/tsconfig.json", "apps/web/src/main.tsx"],
+          "verifications": [
+            {
+              "id": "0.5.1",
+              "description": "apps/web/package.json exists with name @echo-lab/web",
+              "command": "cat apps/web/package.json | grep name",
+              "expected": "@echo-lab/web",
+              "status": "not_started"
+            },
+            {
+              "id": "0.5.2",
+              "description": "apps/web/tsconfig.json extends base",
+              "command": "cat apps/web/tsconfig.json | grep extends",
+              "expected": "../../tsconfig.base.json",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.6",
+          "name": "Create packages/shared package",
+          "status": "not_started",
+          "description": "Initialize packages/shared with package.json and tsconfig.json",
+          "files_to_create": ["packages/shared/package.json", "packages/shared/tsconfig.json", "packages/shared/src/index.ts"],
+          "verifications": [
+            {
+              "id": "0.6.1",
+              "description": "packages/shared/package.json exists with name @echo-lab/shared",
+              "command": "cat packages/shared/package.json | grep name",
+              "expected": "@echo-lab/shared",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.7",
+          "name": "Verify workspace installation",
+          "status": "not_started",
+          "description": "Run pnpm install and verify all packages are linked",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "0.7.1",
+              "description": "pnpm install succeeds",
+              "command": "pnpm install",
+              "expected": "exit code 0, no errors",
+              "status": "not_started"
+            },
+            {
+              "id": "0.7.2",
+              "description": "All packages discovered",
+              "command": "pnpm -r exec pwd | wc -l",
+              "expected": "3 (three packages found)",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.8",
+          "name": "Configure Biome",
+          "status": "not_started",
+          "description": "Setup Biome for linting and formatting with root biome.json",
+          "files_to_create": ["biome.json"],
+          "verifications": [
+            {
+              "id": "0.8.1",
+              "description": "biome.json exists",
+              "command": "cat biome.json",
+              "expected": "contains formatter and linter configuration",
+              "status": "not_started"
+            },
+            {
+              "id": "0.8.2",
+              "description": "Biome installed",
+              "command": "grep @biomejs/biome package.json",
+              "expected": "@biomejs/biome in devDependencies",
+              "status": "not_started"
+            },
+            {
+              "id": "0.8.3",
+              "description": "lint script works",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "0.8.4",
+              "description": "format:check works",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.9",
+          "name": "Setup Vitest",
+          "status": "not_started",
+          "description": "Configure Vitest at root for running tests across workspace",
+          "files_to_create": ["vitest.config.ts"],
+          "verifications": [
+            {
+              "id": "0.9.1",
+              "description": "vitest.config.ts exists",
+              "command": "cat vitest.config.ts",
+              "expected": "valid vitest configuration",
+              "status": "not_started"
+            },
+            {
+              "id": "0.9.2",
+              "description": "vitest installed",
+              "command": "grep vitest package.json",
+              "expected": "vitest in devDependencies",
+              "status": "not_started"
+            },
+            {
+              "id": "0.9.3",
+              "description": "test script exists",
+              "command": "grep test package.json",
+              "expected": "test script defined",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.10",
+          "name": "Setup Playwright",
+          "status": "not_started",
+          "description": "Configure Playwright for e2e browser testing",
+          "files_to_create": ["playwright.config.ts"],
+          "verifications": [
+            {
+              "id": "0.10.1",
+              "description": "playwright.config.ts exists",
+              "command": "cat playwright.config.ts",
+              "expected": "valid playwright configuration",
+              "status": "not_started"
+            },
+            {
+              "id": "0.10.2",
+              "description": "Playwright installed",
+              "command": "grep @playwright/test package.json",
+              "expected": "@playwright/test in devDependencies",
+              "status": "not_started"
+            },
+            {
+              "id": "0.10.3",
+              "description": "test:e2e script exists",
+              "command": "grep test:e2e package.json",
+              "expected": "test:e2e script defined",
+              "status": "not_started"
+            },
+            {
+              "id": "0.10.4",
+              "description": "Playwright browsers installed",
+              "command": "pnpm exec playwright --version",
+              "expected": "Playwright version displayed",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "name": "Shared Package - Schemas & Types",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "1.1",
+          "name": "Install Effect dependencies",
+          "status": "not_started",
+          "description": "Add effect and @effect/schema to packages/shared",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "1.1.1",
+              "description": "Effect packages installed",
+              "command": "cat packages/shared/package.json | grep -E '(\"effect\"|\"@effect/schema\")'",
+              "expected": "both packages listed in dependencies",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "1.2",
+          "name": "Define TransformationType schema",
+          "status": "not_started",
+          "description": "Create literal union schema for transformation types: uppercase, lowercase, reverse, base64-encode, base64-decode, count",
+          "files_to_create": ["packages/shared/src/schemas.ts"],
+          "verifications": [
+            {
+              "id": "1.2.1",
+              "description": "TransformationType schema exports correctly",
+              "command": "cd packages/shared && pnpm exec tsc --noEmit",
+              "expected": "no type errors",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "1.3",
+          "name": "Define request/response schemas",
+          "status": "not_started",
+          "description": "Create TransformRequest and TransformResult schemas with proper fields",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "1.3.1",
+              "description": "TransformRequest has text and transformation fields",
+              "command": "grep -E 'text|transformation' packages/shared/src/schemas.ts",
+              "expected": "both fields defined",
+              "status": "not_started"
+            },
+            {
+              "id": "1.3.2",
+              "description": "TransformResult has id, original, result, transformation, timestamp",
+              "command": "grep -E 'id|original|result|timestamp' packages/shared/src/schemas.ts",
+              "expected": "all fields defined",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "1.4",
+          "name": "Define typed errors",
+          "status": "not_started",
+          "description": "Create InvalidInput and TransformationFailed error schemas with _tag discriminator",
+          "files_to_create": ["packages/shared/src/errors.ts"],
+          "verifications": [
+            {
+              "id": "1.4.1",
+              "description": "Error schemas have _tag field",
+              "command": "grep '_tag' packages/shared/src/errors.ts",
+              "expected": "_tag field present in error definitions",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "1.5",
+          "name": "Export from index",
+          "status": "not_started",
+          "description": "Re-export all schemas and types from packages/shared/src/index.ts",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "1.5.1",
+              "description": "Package builds successfully",
+              "command": "cd packages/shared && pnpm build",
+              "expected": "build completes without errors",
+              "status": "not_started"
+            },
+            {
+              "id": "1.5.2",
+              "description": "Types are importable",
+              "command": "cd packages/shared && pnpm exec tsc --noEmit",
+              "expected": "no type errors",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "1.6",
+          "name": "Write schema unit tests",
+          "status": "not_started",
+          "description": "Unit tests for TransformRequest and TransformResult schemas",
+          "files_to_create": ["packages/shared/src/schemas.test.ts"],
+          "verifications": [
+            {
+              "id": "1.6.1",
+              "description": "Schema tests pass",
+              "command": "pnpm test",
+              "expected": "all tests pass",
+              "status": "not_started"
+            },
+            {
+              "id": "1.6.2",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "1.6.3",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Backend Services (Pure Logic)",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "2.1",
+          "name": "Install Effect dependencies for API",
+          "status": "not_started",
+          "description": "Add effect, @effect/platform, @effect/platform-node to apps/api",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "2.1.1",
+              "description": "Effect packages installed in api",
+              "command": "cat apps/api/package.json | grep -E '@effect/platform'",
+              "expected": "platform packages listed",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "2.2",
+          "name": "Create TransformationService",
+          "status": "not_started",
+          "description": "Effect Service with transform method implementing all 6 transformations",
+          "files_to_create": ["apps/api/src/services/TransformationService.ts"],
+          "verifications": [
+            {
+              "id": "2.2.1",
+              "description": "Service uses Context.Tag pattern",
+              "command": "grep 'Context.Tag' apps/api/src/services/TransformationService.ts",
+              "expected": "Context.Tag usage found",
+              "status": "not_started"
+            },
+            {
+              "id": "2.2.2",
+              "description": "All 6 transformations implemented",
+              "command": "grep -E '(uppercase|lowercase|reverse|base64-encode|base64-decode|count)' apps/api/src/services/TransformationService.ts | wc -l",
+              "expected": "at least 6 matches",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "2.3",
+          "name": "Create HistoryService",
+          "status": "not_started",
+          "description": "Effect Service using Ref<Array<TransformResult>> for in-memory storage with add, getAll, clear methods",
+          "files_to_create": ["apps/api/src/services/HistoryService.ts"],
+          "verifications": [
+            {
+              "id": "2.3.1",
+              "description": "Service uses Effect.Ref for storage",
+              "command": "grep 'Ref' apps/api/src/services/HistoryService.ts",
+              "expected": "Ref usage found",
+              "status": "not_started"
+            },
+            {
+              "id": "2.3.2",
+              "description": "Has add, getAll, clear methods",
+              "command": "grep -E '(add|getAll|clear)' apps/api/src/services/HistoryService.ts",
+              "expected": "all three methods defined",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "2.4",
+          "name": "Export services",
+          "status": "not_started",
+          "description": "Create services index and verify types compile",
+          "files_to_create": ["apps/api/src/services/index.ts"],
+          "verifications": [
+            {
+              "id": "2.4.1",
+              "description": "Services compile without errors",
+              "command": "cd apps/api && pnpm exec tsc --noEmit",
+              "expected": "no type errors",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "2.5",
+          "name": "Write service unit tests",
+          "status": "not_started",
+          "description": "Unit tests for TransformationService and HistoryService using Vitest",
+          "files_to_create": ["apps/api/src/services/TransformationService.test.ts", "apps/api/src/services/HistoryService.test.ts"],
+          "verifications": [
+            {
+              "id": "2.5.1",
+              "description": "Service tests exist",
+              "command": "ls apps/api/src/services/*.test.ts",
+              "expected": "TransformationService.test.ts and HistoryService.test.ts",
+              "status": "not_started"
+            },
+            {
+              "id": "2.5.2",
+              "description": "Service tests pass",
+              "command": "pnpm test",
+              "expected": "all tests pass",
+              "status": "not_started"
+            },
+            {
+              "id": "2.5.3",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "2.5.4",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Backend HTTP API + OpenAPI",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "3.1",
+          "name": "Define HTTP API schema",
+          "status": "not_started",
+          "description": "Create HttpApi with transform group: POST /transform, GET /history, DELETE /history",
+          "files_to_create": ["apps/api/src/api.ts"],
+          "verifications": [
+            {
+              "id": "3.1.1",
+              "description": "API definition uses HttpApi.make",
+              "command": "grep 'HttpApi' apps/api/src/api.ts",
+              "expected": "HttpApi usage found",
+              "status": "not_started"
+            },
+            {
+              "id": "3.1.2",
+              "description": "Three endpoints defined",
+              "command": "grep -E '(post|get|delete)' apps/api/src/api.ts | wc -l",
+              "expected": "at least 3 endpoint definitions",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "3.2",
+          "name": "Implement route handlers",
+          "status": "not_started",
+          "description": "Create handlers that use TransformationService and HistoryService",
+          "files_to_create": ["apps/api/src/handlers.ts"],
+          "verifications": [
+            {
+              "id": "3.2.1",
+              "description": "Handlers use services via Effect.gen",
+              "command": "grep 'Effect.gen' apps/api/src/handlers.ts",
+              "expected": "Effect.gen usage found",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "3.3",
+          "name": "Create live layer composition",
+          "status": "not_started",
+          "description": "Compose all service layers for runtime",
+          "files_to_create": ["apps/api/src/live.ts"],
+          "verifications": [
+            {
+              "id": "3.3.1",
+              "description": "Live layer exports composed layer",
+              "command": "grep 'Layer' apps/api/src/live.ts",
+              "expected": "Layer composition found",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "3.4",
+          "name": "Setup server with OpenAPI",
+          "status": "not_started",
+          "description": "Create main.ts that serves API on port 3001 with Scalar docs at /docs",
+          "files_to_create": ["apps/api/src/main.ts"],
+          "verifications": [
+            {
+              "id": "3.4.1",
+              "description": "Server starts without errors",
+              "command": "cd apps/api && timeout 5 pnpm dev || true",
+              "expected": "server starts, logs listening on 3001",
+              "status": "not_started"
+            },
+            {
+              "id": "3.4.2",
+              "description": "POST /api/transform works",
+              "command": "curl -s -X POST http://localhost:3001/api/transform -H 'Content-Type: application/json' -d '{\"text\":\"hello\",\"transformation\":\"uppercase\"}'",
+              "expected": "returns JSON with result: HELLO",
+              "status": "not_started"
+            },
+            {
+              "id": "3.4.3",
+              "description": "GET /api/transform/history works",
+              "command": "curl -s http://localhost:3001/api/transform/history",
+              "expected": "returns JSON with items array",
+              "status": "not_started"
+            },
+            {
+              "id": "3.4.4",
+              "description": "OpenAPI docs accessible",
+              "command": "curl -s http://localhost:3001/docs | head -20",
+              "expected": "returns HTML (Scalar UI)",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "3.5",
+          "name": "Add CORS for frontend",
+          "status": "not_started",
+          "description": "Enable CORS for localhost:5173",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "3.5.1",
+              "description": "CORS headers present",
+              "command": "curl -s -I -X OPTIONS http://localhost:3001/api/transform -H 'Origin: http://localhost:5173' | grep -i 'access-control'",
+              "expected": "Access-Control-Allow-Origin header present",
+              "status": "not_started"
+            },
+            {
+              "id": "3.5.2",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "3.5.3",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "3.5.4",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Frontend Shell (Vite + shadcn)",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "4.1",
+          "name": "Initialize Vite React project",
+          "status": "not_started",
+          "description": "Setup Vite with React and TypeScript in apps/web",
+          "files_to_create": ["apps/web/vite.config.ts", "apps/web/index.html"],
+          "verifications": [
+            {
+              "id": "4.1.1",
+              "description": "Vite config exists",
+              "command": "cat apps/web/vite.config.ts",
+              "expected": "valid vite config with react plugin",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "4.2",
+          "name": "Setup Tailwind CSS",
+          "status": "not_started",
+          "description": "Configure Tailwind with PostCSS",
+          "files_to_create": ["apps/web/tailwind.config.js", "apps/web/postcss.config.js", "apps/web/src/index.css"],
+          "verifications": [
+            {
+              "id": "4.2.1",
+              "description": "Tailwind config exists",
+              "command": "cat apps/web/tailwind.config.js",
+              "expected": "valid tailwind config",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "4.3",
+          "name": "Install and configure shadcn",
+          "status": "not_started",
+          "description": "Setup shadcn with New York style, neutral palette",
+          "files_to_create": ["apps/web/components.json", "apps/web/src/lib/utils.ts"],
+          "verifications": [
+            {
+              "id": "4.3.1",
+              "description": "shadcn components.json exists",
+              "command": "cat apps/web/components.json",
+              "expected": "style: new-york",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "4.4",
+          "name": "Add required shadcn components",
+          "status": "not_started",
+          "description": "Install Button, Textarea, Select, Card, Toast, Separator components",
+          "files_to_create": ["apps/web/src/components/ui/button.tsx", "apps/web/src/components/ui/card.tsx"],
+          "verifications": [
+            {
+              "id": "4.4.1",
+              "description": "Button component exists",
+              "command": "test -f apps/web/src/components/ui/button.tsx && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            },
+            {
+              "id": "4.4.2",
+              "description": "Card component exists",
+              "command": "test -f apps/web/src/components/ui/card.tsx && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "4.5",
+          "name": "Create basic App layout",
+          "status": "not_started",
+          "description": "Centered card layout with Echo Lab title, dark mode support",
+          "files_to_create": ["apps/web/src/App.tsx"],
+          "verifications": [
+            {
+              "id": "4.5.1",
+              "description": "App.tsx renders Card component",
+              "command": "grep 'Card' apps/web/src/App.tsx",
+              "expected": "Card import and usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "4.6",
+          "name": "Configure API proxy",
+          "status": "not_started",
+          "description": "Proxy /api requests to localhost:3001 in vite.config.ts",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "4.6.1",
+              "description": "Vite proxy configured",
+              "command": "grep 'proxy' apps/web/vite.config.ts",
+              "expected": "proxy configuration for /api",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "4.7",
+          "name": "Verify frontend runs",
+          "status": "not_started",
+          "description": "Start dev server and verify page loads",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "4.7.1",
+              "description": "Dev server starts",
+              "command": "cd apps/web && timeout 10 pnpm dev || true",
+              "expected": "server starts on port 5173",
+              "status": "not_started"
+            },
+            {
+              "id": "4.7.2",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "4.7.3",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "4.7.4",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Frontend State Layer",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "5.1",
+          "name": "Install state management dependencies",
+          "status": "not_started",
+          "description": "Add effect-atom, @tanstack/react-query, effect, @effect/platform to apps/web",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "5.1.1",
+              "description": "All packages installed",
+              "command": "cat apps/web/package.json | grep -E '(effect-atom|@tanstack/react-query)'",
+              "expected": "both packages listed",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "5.2",
+          "name": "Create effect-atom atoms",
+          "status": "not_started",
+          "description": "Define atoms for inputText, selectedTransformation, isHistoryOpen",
+          "files_to_create": ["apps/web/src/atoms/index.ts"],
+          "verifications": [
+            {
+              "id": "5.2.1",
+              "description": "Atoms file exports required atoms",
+              "command": "grep -E '(inputText|selectedTransformation|isHistoryOpen)' apps/web/src/atoms/index.ts",
+              "expected": "all three atoms defined",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "5.3",
+          "name": "Setup TanStack Query",
+          "status": "not_started",
+          "description": "Create QueryClient and provider wrapper",
+          "files_to_create": ["apps/web/src/lib/query-client.ts", "apps/web/src/providers.tsx"],
+          "verifications": [
+            {
+              "id": "5.3.1",
+              "description": "QueryClientProvider in providers",
+              "command": "grep 'QueryClientProvider' apps/web/src/providers.tsx",
+              "expected": "QueryClientProvider usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "5.4",
+          "name": "Create Effect HTTP client",
+          "status": "not_started",
+          "description": "Typed API client using @effect/platform HttpClient",
+          "files_to_create": ["apps/web/src/lib/api-client.ts"],
+          "verifications": [
+            {
+              "id": "5.4.1",
+              "description": "API client uses HttpClient",
+              "command": "grep 'HttpClient' apps/web/src/lib/api-client.ts",
+              "expected": "HttpClient import and usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "5.5",
+          "name": "Create query hooks",
+          "status": "not_started",
+          "description": "useHistory and useTransform hooks with TanStack Query",
+          "files_to_create": ["apps/web/src/hooks/useHistory.ts", "apps/web/src/hooks/useTransform.ts"],
+          "verifications": [
+            {
+              "id": "5.5.1",
+              "description": "useHistory hook exists",
+              "command": "grep 'useQuery' apps/web/src/hooks/useHistory.ts",
+              "expected": "useQuery usage",
+              "status": "not_started"
+            },
+            {
+              "id": "5.5.2",
+              "description": "useTransform hook exists",
+              "command": "grep 'useMutation' apps/web/src/hooks/useTransform.ts",
+              "expected": "useMutation usage",
+              "status": "not_started"
+            },
+            {
+              "id": "5.5.3",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "5.5.4",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "5.5.5",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Transform UI Component",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "6.1",
+          "name": "Create TransformCard component",
+          "status": "not_started",
+          "description": "Main card with textarea, select dropdown, transform button",
+          "files_to_create": ["apps/web/src/components/TransformCard.tsx"],
+          "verifications": [
+            {
+              "id": "6.1.1",
+              "description": "Component uses shadcn components",
+              "command": "grep -E '(Textarea|Select|Button)' apps/web/src/components/TransformCard.tsx",
+              "expected": "all three components used",
+              "status": "not_started"
+            },
+            {
+              "id": "6.1.2",
+              "description": "Component uses atoms",
+              "command": "grep 'atom' apps/web/src/components/TransformCard.tsx",
+              "expected": "atom usage for state",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "6.2",
+          "name": "Create TransformResult component",
+          "status": "not_started",
+          "description": "Result display area with fade-in animation",
+          "files_to_create": ["apps/web/src/components/TransformResult.tsx"],
+          "verifications": [
+            {
+              "id": "6.2.1",
+              "description": "Component exists",
+              "command": "test -f apps/web/src/components/TransformResult.tsx && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "6.3",
+          "name": "Create CopyButton component",
+          "status": "not_started",
+          "description": "Button that copies result to clipboard with toast feedback",
+          "files_to_create": ["apps/web/src/components/CopyButton.tsx"],
+          "verifications": [
+            {
+              "id": "6.3.1",
+              "description": "Uses clipboard API",
+              "command": "grep 'clipboard' apps/web/src/components/CopyButton.tsx",
+              "expected": "clipboard API usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "6.4",
+          "name": "Add toast notifications",
+          "status": "not_started",
+          "description": "Setup toast for copy success and errors",
+          "files_to_create": ["apps/web/src/components/ui/toaster.tsx"],
+          "verifications": [
+            {
+              "id": "6.4.1",
+              "description": "Toaster component exists",
+              "command": "test -f apps/web/src/components/ui/toaster.tsx && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "6.5",
+          "name": "Wire up transform functionality",
+          "status": "not_started",
+          "description": "Connect transform button to useTransform mutation",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "6.5.1",
+              "description": "Transform card uses useTransform hook",
+              "command": "grep 'useTransform' apps/web/src/components/TransformCard.tsx",
+              "expected": "useTransform usage",
+              "status": "not_started"
+            },
+            {
+              "id": "6.5.2",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "6.5.3",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "6.5.4",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Frontend-Backend Integration",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "7.1",
+          "name": "Connect transform mutation to API",
+          "status": "not_started",
+          "description": "useTransform calls real POST /api/transform endpoint",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "7.1.1",
+              "description": "Mutation calls API",
+              "command": "grep -E '(/api/transform|api-client)' apps/web/src/hooks/useTransform.ts",
+              "expected": "API endpoint reference",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "7.2",
+          "name": "Add error handling",
+          "status": "not_started",
+          "description": "Pattern match on error _tag and show appropriate toast",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "7.2.1",
+              "description": "Error handling in transform card",
+              "command": "grep -E '(_tag|error)' apps/web/src/components/TransformCard.tsx",
+              "expected": "error handling logic",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "7.3",
+          "name": "Invalidate history on transform",
+          "status": "not_started",
+          "description": "After successful transform, invalidate history query",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "7.3.1",
+              "description": "Query invalidation in useTransform",
+              "command": "grep 'invalidate' apps/web/src/hooks/useTransform.ts",
+              "expected": "queryClient.invalidate usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "7.4",
+          "name": "End-to-end transform test",
+          "status": "not_started",
+          "description": "Verify full flow works with both servers running",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "7.4.1",
+              "description": "Transform uppercase works e2e",
+              "command": "echo 'Manual test: type hello, select uppercase, click transform, verify HELLO appears'",
+              "expected": "result shows HELLO",
+              "status": "not_started"
+            },
+            {
+              "id": "7.4.2",
+              "description": "Error handling works e2e",
+              "command": "echo 'Manual test: type invalid base64, select base64-decode, verify error toast'",
+              "expected": "error toast appears",
+              "status": "not_started"
+            },
+            {
+              "id": "7.4.3",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "7.4.4",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "7.4.5",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "History Feature",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "8.1",
+          "name": "Create HistoryPanel component",
+          "status": "not_started",
+          "description": "Sidebar or collapsible section showing transformation history",
+          "files_to_create": ["apps/web/src/components/HistoryPanel.tsx"],
+          "verifications": [
+            {
+              "id": "8.1.1",
+              "description": "HistoryPanel exists and uses useHistory",
+              "command": "grep 'useHistory' apps/web/src/components/HistoryPanel.tsx",
+              "expected": "useHistory hook usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "8.2",
+          "name": "Create HistoryItem component",
+          "status": "not_started",
+          "description": "Individual history item with truncated text, type badge, timestamp",
+          "files_to_create": ["apps/web/src/components/HistoryItem.tsx"],
+          "verifications": [
+            {
+              "id": "8.2.1",
+              "description": "HistoryItem shows required info",
+              "command": "grep -E '(original|result|timestamp)' apps/web/src/components/HistoryItem.tsx",
+              "expected": "displays original, result, timestamp",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "8.3",
+          "name": "Create EmptyHistory component",
+          "status": "not_started",
+          "description": "Empty state shown when no history exists",
+          "files_to_create": ["apps/web/src/components/EmptyHistory.tsx"],
+          "verifications": [
+            {
+              "id": "8.3.1",
+              "description": "EmptyHistory component exists",
+              "command": "test -f apps/web/src/components/EmptyHistory.tsx && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "8.4",
+          "name": "Add clear history functionality",
+          "status": "not_started",
+          "description": "Clear button that calls DELETE /api/transform/history",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "8.4.1",
+              "description": "Clear button in HistoryPanel",
+              "command": "grep -E '(clear|Clear|DELETE)' apps/web/src/components/HistoryPanel.tsx",
+              "expected": "clear functionality present",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "8.5",
+          "name": "Wire history panel to App",
+          "status": "not_started",
+          "description": "Add HistoryPanel to App.tsx, toggle via isHistoryOpen atom",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "8.5.1",
+              "description": "HistoryPanel in App",
+              "command": "grep 'HistoryPanel' apps/web/src/App.tsx",
+              "expected": "HistoryPanel import and usage",
+              "status": "not_started"
+            },
+            {
+              "id": "8.5.2",
+              "description": "Toggle uses isHistoryOpen atom",
+              "command": "grep 'isHistoryOpen' apps/web/src/App.tsx",
+              "expected": "atom controls visibility",
+              "status": "not_started"
+            },
+            {
+              "id": "8.5.3",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "8.5.4",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "8.5.5",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Polish & Final Touches",
+      "status": "not_started",
+      "tasks": [
+        {
+          "id": "9.1",
+          "name": "Add animations",
+          "status": "not_started",
+          "description": "Result fade-in, history items animate, button micro-interactions",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "9.1.1",
+              "description": "Animation classes present",
+              "command": "grep -rE '(animate-|transition-|duration-)' apps/web/src/components/",
+              "expected": "tailwind animation classes used",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "9.2",
+          "name": "Make layout responsive",
+          "status": "not_started",
+          "description": "Mobile-friendly at 390px width",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "9.2.1",
+              "description": "Responsive classes present",
+              "command": "grep -rE '(sm:|md:|lg:)' apps/web/src/components/",
+              "expected": "responsive breakpoint classes",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "9.3",
+          "name": "Add keyboard shortcut",
+          "status": "not_started",
+          "description": "Cmd/Ctrl + Enter triggers transform",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "9.3.1",
+              "description": "Keyboard handler exists",
+              "command": "grep -E '(keydown|metaKey|ctrlKey)' apps/web/src/components/TransformCard.tsx",
+              "expected": "keyboard event handling",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "9.4",
+          "name": "Add loading skeletons",
+          "status": "not_started",
+          "description": "Skeleton loading state for history",
+          "files_to_create": ["apps/web/src/components/ui/skeleton.tsx"],
+          "verifications": [
+            {
+              "id": "9.4.1",
+              "description": "Skeleton component exists",
+              "command": "test -f apps/web/src/components/ui/skeleton.tsx && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "9.5",
+          "name": "Final dark mode check",
+          "status": "not_started",
+          "description": "Verify all components look good in dark mode",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "9.5.1",
+              "description": "Dark mode class on html/body",
+              "command": "grep -E '(dark:|class=.*dark)' apps/web/index.html apps/web/src/App.tsx",
+              "expected": "dark mode support",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "9.6",
+          "name": "Final build verification",
+          "status": "not_started",
+          "description": "Ensure production build works",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "9.6.1",
+              "description": "TypeScript passes",
+              "command": "pnpm typecheck",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "9.6.2",
+              "description": "Production build succeeds",
+              "command": "pnpm build",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "9.6.3",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "9.6.4",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "9.6.5",
+              "description": "All tests pass",
+              "command": "pnpm test",
+              "expected": "exit code 0",
+              "status": "not_started"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "agent_instructions": {
+    "workflow": [
+      "1. Read this file to determine current state",
+      "2. Find the first phase with status != 'complete'",
+      "3. Within that phase, find the first task with status != 'complete'",
+      "4. If task status is 'not_started', set it to 'in_progress' and update last_updated",
+      "5. Implement the task according to its description and files_to_create",
+      "6. Run each verification command and update verification status to 'complete' or 'failed'",
+      "7. If any verification fails, troubleshoot and fix, then re-verify",
+      "8. Once all verifications pass, set task status to 'complete'",
+      "9. If all tasks in phase are complete, set phase status to 'complete'",
+      "10. Update current_phase and current_task fields",
+      "11. Save the updated JSON file",
+      "12. STOP - do not proceed to next task in same session"
+    ],
+    "status_values": {
+      "not_started": "Work has not begun",
+      "in_progress": "Currently being worked on",
+      "complete": "Successfully finished and verified",
+      "failed": "Verification failed, needs fix",
+      "blocked": "Cannot proceed due to dependency"
+    },
+    "rules": [
+      "Always update last_updated timestamp when modifying the file",
+      "Never skip verifications - all must pass",
+      "If a verification command fails, debug and fix before marking complete",
+      "One task per session - stop after completing a task",
+      "Keep the JSON file as single source of truth"
+    ]
+  }
+}
