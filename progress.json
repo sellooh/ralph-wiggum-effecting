@@ -12,6 +12,22 @@
       "status": "not_started",
       "tasks": [
         {
+          "id": "0.0.5",
+          "name": "Set Node version requirements",
+          "status": "not_started",
+          "description": "Create .nvmrc with Node 20 and add engines field to root package.json",
+          "files_to_create": [".nvmrc"],
+          "verifications": [
+            {
+              "id": "0.0.5.1",
+              "description": ".nvmrc specifies Node 20",
+              "command": "cat .nvmrc",
+              "expected": "20 or v20.x",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
           "id": "0.1",
           "name": "Initialize pnpm workspace",
           "status": "not_started",
@@ -47,7 +63,7 @@
           "id": "0.3",
           "name": "Create TypeScript base config",
           "status": "not_started",
-          "description": "Shared tsconfig.base.json with strict settings, ES2022 target",
+          "description": "Shared tsconfig.base.json with strict settings, ES2022 target, composite: true, declaration: true for project references",
           "files_to_create": ["tsconfig.base.json"],
           "verifications": [
             {
@@ -56,6 +72,13 @@
               "command": "grep strict tsconfig.base.json",
               "expected": "strict: true",
               "status": "not_started"
+            },
+            {
+              "id": "0.3.2",
+              "description": "tsconfig.base.json has composite build settings",
+              "command": "grep -E '(composite|declaration)' tsconfig.base.json",
+              "expected": "composite: true and declaration: true present",
+              "status": "not_started"
             }
           ]
         },
@@ -63,7 +86,7 @@
           "id": "0.4",
           "name": "Create apps/api package",
           "status": "not_started",
-          "description": "Initialize apps/api with package.json and tsconfig.json extending base",
+          "description": "Initialize apps/api with package.json (including build script: tsc --build) and tsconfig.json extending base with composite: true",
           "files_to_create": ["apps/api/package.json", "apps/api/tsconfig.json", "apps/api/src/index.ts"],
           "verifications": [
             {
@@ -86,7 +109,7 @@
           "id": "0.5",
           "name": "Create apps/web package",
           "status": "not_started",
-          "description": "Initialize apps/web with package.json and tsconfig.json extending base",
+          "description": "Initialize apps/web with package.json (including build script: vite build) and tsconfig.json extending base",
           "files_to_create": ["apps/web/package.json", "apps/web/tsconfig.json", "apps/web/src/main.tsx"],
           "verifications": [
             {
@@ -109,7 +132,7 @@
           "id": "0.6",
           "name": "Create packages/shared package",
           "status": "not_started",
-          "description": "Initialize packages/shared with package.json and tsconfig.json",
+          "description": "Initialize packages/shared with package.json (including build script: tsc --build) and tsconfig.json with composite: true",
           "files_to_create": ["packages/shared/package.json", "packages/shared/tsconfig.json", "packages/shared/src/index.ts"],
           "verifications": [
             {
@@ -117,6 +140,13 @@
               "description": "packages/shared/package.json exists with name @echo-lab/shared",
               "command": "grep name packages/shared/package.json",
               "expected": "@echo-lab/shared",
+              "status": "not_started"
+            },
+            {
+              "id": "0.6.2",
+              "description": "packages/shared has build script",
+              "command": "grep build packages/shared/package.json",
+              "expected": "build script defined",
               "status": "not_started"
             }
           ]
@@ -161,7 +191,7 @@
             {
               "id": "0.7.2",
               "description": "All packages discovered",
-              "command": "pnpm ls -r --depth -1 | grep -c '@echo-lab'",
+              "command": "pnpm ls -r --json 2>/dev/null | grep -c '@echo-lab'",
               "expected": "3 (three @echo-lab packages found)",
               "status": "not_started"
             }
@@ -228,7 +258,7 @@
             {
               "id": "0.9.3",
               "description": "test script exists",
-              "command": "grep test package.json",
+              "command": "grep '\"test\":' package.json",
               "expected": "test script defined",
               "status": "not_started"
             }
@@ -264,9 +294,16 @@
             },
             {
               "id": "0.10.4",
-              "description": "Playwright browsers installed",
+              "description": "Playwright CLI available",
               "command": "pnpm exec playwright --version",
               "expected": "Playwright version displayed",
+              "status": "not_started"
+            },
+            {
+              "id": "0.10.5",
+              "description": "Playwright browsers installed",
+              "command": "pnpm exec playwright install chromium",
+              "expected": "chromium browser installed",
               "status": "not_started"
             }
           ]
@@ -452,7 +489,7 @@
           "id": "2.1",
           "name": "Install Effect dependencies for API",
           "status": "not_started",
-          "description": "Add effect, @effect/platform, @effect/platform-node, and @echo-lab/shared (workspace:*) to apps/api",
+          "description": "Add effect, @effect/platform, @effect/platform-node, @types/node, and @echo-lab/shared (workspace:*) to apps/api",
           "files_to_create": [],
           "verifications": [
             {
@@ -467,6 +504,13 @@
               "description": "Shared package linked as workspace dependency",
               "command": "grep '@echo-lab/shared' apps/api/package.json",
               "expected": "@echo-lab/shared with workspace:* version",
+              "status": "not_started"
+            },
+            {
+              "id": "2.1.3",
+              "description": "@types/node installed for Node APIs",
+              "command": "grep '@types/node' apps/api/package.json",
+              "expected": "@types/node in devDependencies",
               "status": "not_started"
             }
           ]
@@ -717,7 +761,7 @@
           "id": "4.1",
           "name": "Initialize Vite React project",
           "status": "not_started",
-          "description": "Setup Vite with React and TypeScript in apps/web",
+          "description": "Setup Vite with React and TypeScript in apps/web, including /api proxy to localhost:3001",
           "files_to_create": ["apps/web/vite.config.ts", "apps/web/index.html"],
           "verifications": [
             {
@@ -725,6 +769,13 @@
               "description": "Vite config exists",
               "command": "cat apps/web/vite.config.ts",
               "expected": "valid vite config with react plugin",
+              "status": "not_started"
+            },
+            {
+              "id": "4.1.2",
+              "description": "Vite proxy configured for /api",
+              "command": "grep 'proxy' apps/web/vite.config.ts",
+              "expected": "proxy configuration for /api to localhost:3001",
               "status": "not_started"
             }
           ]
@@ -802,50 +853,34 @@
         },
         {
           "id": "4.6",
-          "name": "Configure API proxy",
-          "status": "not_started",
-          "description": "Proxy /api requests to localhost:3001 in vite.config.ts",
-          "files_to_create": [],
-          "verifications": [
-            {
-              "id": "4.6.1",
-              "description": "Vite proxy configured",
-              "command": "grep 'proxy' apps/web/vite.config.ts",
-              "expected": "proxy configuration for /api",
-              "status": "not_started"
-            }
-          ]
-        },
-        {
-          "id": "4.7",
           "name": "Verify frontend runs",
           "status": "not_started",
           "description": "Start dev server and verify page loads",
           "files_to_create": [],
           "verifications": [
             {
-              "id": "4.7.1",
+              "id": "4.6.1",
               "description": "Dev server starts",
               "command": "cd apps/web && timeout 10 pnpm dev || true",
               "expected": "server starts on port 5173",
               "status": "not_started"
             },
             {
-              "id": "4.7.2",
+              "id": "4.6.2",
               "description": "Linting passes",
               "command": "pnpm lint",
               "expected": "exit code 0",
               "status": "not_started"
             },
             {
-              "id": "4.7.3",
+              "id": "4.6.3",
               "description": "Formatting is correct",
               "command": "pnpm format:check",
               "expected": "exit code 0",
               "status": "not_started"
             },
             {
-              "id": "4.7.4",
+              "id": "4.6.4",
               "description": "All tests pass",
               "command": "pnpm test",
               "expected": "exit code 0",
@@ -911,6 +946,22 @@
               "description": "QueryClientProvider in providers",
               "command": "grep 'QueryClientProvider' apps/web/src/providers.tsx",
               "expected": "QueryClientProvider usage",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "5.3.5",
+          "name": "Create Effect browser runtime",
+          "status": "not_started",
+          "description": "Setup Effect runtime layer for running Effects in browser context with FetchHttpClient",
+          "files_to_create": ["apps/web/src/lib/effect-runtime.ts"],
+          "verifications": [
+            {
+              "id": "5.3.5.1",
+              "description": "Effect runtime file exists with FetchHttpClient",
+              "command": "grep 'FetchHttpClient' apps/web/src/lib/effect-runtime.ts",
+              "expected": "FetchHttpClient usage for browser HTTP",
               "status": "not_started"
             }
           ]
