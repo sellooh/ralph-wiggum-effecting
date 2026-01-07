@@ -58,7 +58,7 @@ pnpm test:e2e                   # ✓ Playwright runner works (no tests yet is O
 ## Phase 1: Shared Package - Schemas & Types
 
 ### Requirements
-- Install `effect` and `@effect/schema` in shared package
+- Install `effect` in shared package (Schema is included in effect v3+)
 - Define `TransformationType` as a literal union schema
 - Define `TransformRequest` schema (text + transformation)
 - Define `TransformResult` schema (original, result, transformation, id, timestamp)
@@ -99,7 +99,7 @@ pnpm test                       # ✓ All tests pass
 - Implement all 6 transformations as pure functions
 - Create `HistoryService` using `Effect.Ref<Array<TransformResult>>`
 - Services should be testable without HTTP layer
-- Use Effect's dependency injection pattern (`Context.Tag`)
+- Use Effect's service pattern (`Effect.Service` or class-based services)
 
 ### Files to Create
 ```
@@ -192,8 +192,9 @@ pnpm test                       # ✓ All tests pass
 
 ### Requirements
 - Initialize Vite React-TS project in `apps/web`
-- Install and configure shadcn (New York style, neutral colors)
-- Install required shadcn components: Button, Input, Textarea, Select, Card, Toast, Separator
+- Configure Tailwind CSS v4 with CSS-based config (no .js config file)
+- Run `npx shadcn@latest init --style new-york` for shadcn setup
+- Run `npx shadcn@latest add button textarea select card toast separator` for components
 - Set up basic layout with centered Card
 - Configure dark mode support via class strategy
 - Proxy `/api` requests to backend in vite.config.ts
@@ -204,13 +205,12 @@ apps/web/
 ├── src/
 │   ├── main.tsx
 │   ├── App.tsx
-│   ├── index.css           # Tailwind + shadcn styles
+│   ├── index.css           # Tailwind v4 + shadcn styles (@theme directive)
 │   ├── components/
-│   │   └── ui/             # shadcn components
+│   │   └── ui/             # shadcn components (via CLI)
 │   └── lib/
 │       └── utils.ts        # cn() helper
 ├── components.json          # shadcn config
-├── tailwind.config.js
 ├── postcss.config.js
 └── vite.config.ts
 ```
@@ -236,7 +236,7 @@ pnpm test                       # ✓ All tests pass
 ## Phase 5: Frontend State Layer
 
 ### Requirements
-- Install `effect-atom`, `@tanstack/react-query`, `effect`, `@effect/platform`
+- Install `@effect-atom/atom-react`, `@tanstack/react-query`, `effect`, `@effect/platform`
 - Create atoms for: `inputText`, `selectedTransformation`, `isHistoryOpen`
 - Set up TanStack Query client with provider
 - Create typed API client using `@effect/platform` `HttpClient`

@@ -37,7 +37,7 @@
             {
               "id": "0.2.1",
               "description": "package.json has workspace scripts",
-              "command": "cat package.json | grep -E '(dev|build|typecheck)'",
+              "command": "grep -E '(dev|build|typecheck)' package.json",
               "expected": "shows dev, build, typecheck scripts",
               "status": "not_started"
             }
@@ -53,7 +53,7 @@
             {
               "id": "0.3.1",
               "description": "tsconfig.base.json exists with strict mode",
-              "command": "cat tsconfig.base.json | grep strict",
+              "command": "grep strict tsconfig.base.json",
               "expected": "strict: true",
               "status": "not_started"
             }
@@ -69,14 +69,14 @@
             {
               "id": "0.4.1",
               "description": "apps/api/package.json exists with name @echo-lab/api",
-              "command": "cat apps/api/package.json | grep name",
+              "command": "grep name apps/api/package.json",
               "expected": "@echo-lab/api",
               "status": "not_started"
             },
             {
               "id": "0.4.2",
               "description": "apps/api/tsconfig.json extends base",
-              "command": "cat apps/api/tsconfig.json | grep extends",
+              "command": "grep extends apps/api/tsconfig.json",
               "expected": "../../tsconfig.base.json",
               "status": "not_started"
             }
@@ -92,14 +92,14 @@
             {
               "id": "0.5.1",
               "description": "apps/web/package.json exists with name @echo-lab/web",
-              "command": "cat apps/web/package.json | grep name",
+              "command": "grep name apps/web/package.json",
               "expected": "@echo-lab/web",
               "status": "not_started"
             },
             {
               "id": "0.5.2",
               "description": "apps/web/tsconfig.json extends base",
-              "command": "cat apps/web/tsconfig.json | grep extends",
+              "command": "grep extends apps/web/tsconfig.json",
               "expected": "../../tsconfig.base.json",
               "status": "not_started"
             }
@@ -115,7 +115,7 @@
             {
               "id": "0.6.1",
               "description": "packages/shared/package.json exists with name @echo-lab/shared",
-              "command": "cat packages/shared/package.json | grep name",
+              "command": "grep name packages/shared/package.json",
               "expected": "@echo-lab/shared",
               "status": "not_started"
             }
@@ -257,16 +257,16 @@
       "tasks": [
         {
           "id": "1.1",
-          "name": "Install Effect dependencies",
+          "name": "Install Effect dependency",
           "status": "not_started",
-          "description": "Add effect and @effect/schema to packages/shared",
+          "description": "Add effect to packages/shared (Schema is included in effect v3+)",
           "files_to_create": [],
           "verifications": [
             {
               "id": "1.1.1",
-              "description": "Effect packages installed",
-              "command": "cat packages/shared/package.json | grep -E '(\"effect\"|\"@effect/schema\")'",
-              "expected": "both packages listed in dependencies",
+              "description": "Effect package installed",
+              "command": "grep '\"effect\"' packages/shared/package.json",
+              "expected": "effect in dependencies",
               "status": "not_started"
             }
           ]
@@ -396,7 +396,7 @@
             {
               "id": "2.1.1",
               "description": "Effect packages installed in api",
-              "command": "cat apps/api/package.json | grep -E '@effect/platform'",
+              "command": "grep -E '@effect/platform' apps/api/package.json",
               "expected": "platform packages listed",
               "status": "not_started"
             }
@@ -411,9 +411,9 @@
           "verifications": [
             {
               "id": "2.2.1",
-              "description": "Service uses Context.Tag pattern",
-              "command": "grep 'Context.Tag' apps/api/src/services/TransformationService.ts",
-              "expected": "Context.Tag usage found",
+              "description": "Service uses Effect service pattern",
+              "command": "grep -E '(Effect\\.Service|class.*Service)' apps/api/src/services/TransformationService.ts",
+              "expected": "Effect service pattern found",
               "status": "not_started"
             },
             {
@@ -662,25 +662,25 @@
         },
         {
           "id": "4.2",
-          "name": "Setup Tailwind CSS",
+          "name": "Setup Tailwind CSS v4",
           "status": "not_started",
-          "description": "Configure Tailwind with PostCSS",
-          "files_to_create": ["apps/web/tailwind.config.js", "apps/web/postcss.config.js", "apps/web/src/index.css"],
+          "description": "Configure Tailwind v4 with CSS-based config (no .js config file)",
+          "files_to_create": ["apps/web/postcss.config.js", "apps/web/src/index.css"],
           "verifications": [
             {
               "id": "4.2.1",
-              "description": "Tailwind config exists",
-              "command": "cat apps/web/tailwind.config.js",
-              "expected": "valid tailwind config",
+              "description": "Tailwind v4 configured in CSS",
+              "command": "grep '@theme' apps/web/src/index.css",
+              "expected": "@theme directive present",
               "status": "not_started"
             }
           ]
         },
         {
           "id": "4.3",
-          "name": "Install and configure shadcn",
+          "name": "Initialize shadcn with CLI",
           "status": "not_started",
-          "description": "Setup shadcn with New York style, neutral palette",
+          "description": "Run npx shadcn@latest init --style new-york for Tailwind v4 setup",
           "files_to_create": ["apps/web/components.json", "apps/web/src/lib/utils.ts"],
           "verifications": [
             {
@@ -694,9 +694,9 @@
         },
         {
           "id": "4.4",
-          "name": "Add required shadcn components",
+          "name": "Add shadcn components via CLI",
           "status": "not_started",
-          "description": "Install Button, Textarea, Select, Card, Toast, Separator components",
+          "description": "Run npx shadcn@latest add button textarea select card toast separator",
           "files_to_create": ["apps/web/src/components/ui/button.tsx", "apps/web/src/components/ui/card.tsx"],
           "verifications": [
             {
@@ -795,13 +795,13 @@
           "id": "5.1",
           "name": "Install state management dependencies",
           "status": "not_started",
-          "description": "Add effect-atom, @tanstack/react-query, effect, @effect/platform to apps/web",
+          "description": "Add @effect-atom/atom-react, @tanstack/react-query, effect, @effect/platform to apps/web",
           "files_to_create": [],
           "verifications": [
             {
               "id": "5.1.1",
               "description": "All packages installed",
-              "command": "cat apps/web/package.json | grep -E '(effect-atom|@tanstack/react-query)'",
+              "command": "grep -E '(@effect-atom/atom-react|@tanstack/react-query)' apps/web/package.json",
               "expected": "both packages listed",
               "status": "not_started"
             }
