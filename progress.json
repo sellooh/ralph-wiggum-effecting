@@ -122,6 +122,29 @@
           ]
         },
         {
+          "id": "0.6.5",
+          "name": "Create root tsconfig.json with project references",
+          "status": "not_started",
+          "description": "Root tsconfig.json that references all workspace packages for IDE support and composite builds",
+          "files_to_create": ["tsconfig.json"],
+          "verifications": [
+            {
+              "id": "0.6.5.1",
+              "description": "Root tsconfig.json has references array",
+              "command": "grep references tsconfig.json",
+              "expected": "references array present",
+              "status": "not_started"
+            },
+            {
+              "id": "0.6.5.2",
+              "description": "References include all three packages",
+              "command": "grep -E '(apps/api|apps/web|packages/shared)' tsconfig.json | wc -l",
+              "expected": "3 references to workspace packages",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
           "id": "0.7",
           "name": "Verify workspace installation",
           "status": "not_started",
@@ -138,8 +161,8 @@
             {
               "id": "0.7.2",
               "description": "All packages discovered",
-              "command": "pnpm -r exec pwd | wc -l",
-              "expected": "3 (three packages found)",
+              "command": "pnpm ls -r --depth -1 | grep -c '@echo-lab'",
+              "expected": "3 (three @echo-lab packages found)",
               "status": "not_started"
             }
           ]
@@ -244,6 +267,45 @@
               "description": "Playwright browsers installed",
               "command": "pnpm exec playwright --version",
               "expected": "Playwright version displayed",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.11",
+          "name": "Create .gitignore",
+          "status": "not_started",
+          "description": "Root .gitignore for node_modules, dist, .env, and IDE files",
+          "files_to_create": [".gitignore"],
+          "verifications": [
+            {
+              "id": "0.11.1",
+              "description": ".gitignore contains essential patterns",
+              "command": "grep -E '(node_modules|dist|\\.env)' .gitignore",
+              "expected": "node_modules, dist, .env patterns present",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.12",
+          "name": "Install tsx for development",
+          "status": "not_started",
+          "description": "Add tsx as root devDependency for running TypeScript directly",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "0.12.1",
+              "description": "tsx installed in devDependencies",
+              "command": "grep tsx package.json",
+              "expected": "tsx in devDependencies",
+              "status": "not_started"
+            },
+            {
+              "id": "0.12.2",
+              "description": "tsx can execute TypeScript",
+              "command": "pnpm exec tsx --version",
+              "expected": "tsx version displayed",
               "status": "not_started"
             }
           ]
@@ -390,7 +452,7 @@
           "id": "2.1",
           "name": "Install Effect dependencies for API",
           "status": "not_started",
-          "description": "Add effect, @effect/platform, @effect/platform-node to apps/api",
+          "description": "Add effect, @effect/platform, @effect/platform-node, and @echo-lab/shared (workspace:*) to apps/api",
           "files_to_create": [],
           "verifications": [
             {
@@ -398,6 +460,13 @@
               "description": "Effect packages installed in api",
               "command": "grep -E '@effect/platform' apps/api/package.json",
               "expected": "platform packages listed",
+              "status": "not_started"
+            },
+            {
+              "id": "2.1.2",
+              "description": "Shared package linked as workspace dependency",
+              "command": "grep '@echo-lab/shared' apps/api/package.json",
+              "expected": "@echo-lab/shared with workspace:* version",
               "status": "not_started"
             }
           ]
@@ -573,27 +642,27 @@
             {
               "id": "3.4.1",
               "description": "Server starts without errors",
-              "command": "cd apps/api && timeout 5 pnpm dev || true",
-              "expected": "server starts, logs listening on 3001",
+              "command": "cd apps/api && pnpm dev &",
+              "expected": "server starts in background, logs listening on 3001 (keep running for subsequent tests)",
               "status": "not_started"
             },
             {
               "id": "3.4.2",
-              "description": "POST /api/transform works",
+              "description": "POST /api/transform works (requires server from 3.4.1)",
               "command": "curl -s -X POST http://localhost:3001/api/transform -H 'Content-Type: application/json' -d '{\"text\":\"hello\",\"transformation\":\"uppercase\"}'",
               "expected": "returns JSON with result: HELLO",
               "status": "not_started"
             },
             {
               "id": "3.4.3",
-              "description": "GET /api/transform/history works",
+              "description": "GET /api/transform/history works (requires server from 3.4.1)",
               "command": "curl -s http://localhost:3001/api/transform/history",
               "expected": "returns JSON with items array",
               "status": "not_started"
             },
             {
               "id": "3.4.4",
-              "description": "OpenAPI docs accessible",
+              "description": "OpenAPI docs accessible (requires server from 3.4.1)",
               "command": "curl -s http://localhost:3001/docs | head -20",
               "expected": "returns HTML (Scalar UI)",
               "status": "not_started"
@@ -609,7 +678,7 @@
           "verifications": [
             {
               "id": "3.5.1",
-              "description": "CORS headers present",
+              "description": "CORS headers present (requires server from 3.4.1)",
               "command": "curl -s -I -X OPTIONS http://localhost:3001/api/transform -H 'Origin: http://localhost:5173' | grep -i 'access-control'",
               "expected": "Access-Control-Allow-Origin header present",
               "status": "not_started"
@@ -795,7 +864,7 @@
           "id": "5.1",
           "name": "Install state management dependencies",
           "status": "not_started",
-          "description": "Add @effect-atom/atom-react, @tanstack/react-query, effect, @effect/platform to apps/web",
+          "description": "Add @effect-atom/atom-react, @tanstack/react-query, effect, @effect/platform, and @echo-lab/shared (workspace:*) to apps/web",
           "files_to_create": [],
           "verifications": [
             {
@@ -803,6 +872,13 @@
               "description": "All packages installed",
               "command": "grep -E '(@effect-atom/atom-react|@tanstack/react-query)' apps/web/package.json",
               "expected": "both packages listed",
+              "status": "not_started"
+            },
+            {
+              "id": "5.1.2",
+              "description": "Shared package linked as workspace dependency",
+              "command": "grep '@echo-lab/shared' apps/web/package.json",
+              "expected": "@echo-lab/shared with workspace:* version",
               "status": "not_started"
             }
           ]

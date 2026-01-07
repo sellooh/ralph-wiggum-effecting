@@ -10,6 +10,7 @@
 - Root `package.json` with workspace scripts
 - TypeScript config with project references
 - Shared `tsconfig.base.json` for consistent settings
+- Root `tsconfig.json` with project references to all workspace packages
 - Configure Biome for linting and formatting
 - Add root `biome.json` configuration
 - Add workspace scripts for `lint`, `format`, `format:check`
@@ -19,6 +20,8 @@
 - Install Playwright for e2e browser testing
 - Configure Playwright in `playwright.config.ts`
 - Add e2e test script (`test:e2e`) to root package.json
+- Create `.gitignore` for node_modules, dist, .env, IDE files
+- Install `tsx` as root devDependency for running TypeScript directly
 
 ### Files to Create
 ```
@@ -26,9 +29,11 @@ echo-lab/
 ├── pnpm-workspace.yaml
 ├── package.json
 ├── tsconfig.base.json
+├── tsconfig.json          # Root with project references
 ├── biome.json
 ├── vitest.config.ts
 ├── playwright.config.ts
+├── .gitignore
 ├── apps/
 │   ├── api/
 │   │   ├── package.json
@@ -95,6 +100,8 @@ pnpm test                       # ✓ All tests pass
 ## Phase 2: Backend Services (Pure Logic)
 
 ### Requirements
+- Install effect, @effect/platform, @effect/platform-node in apps/api
+- Add @echo-lab/shared as workspace dependency (workspace:*)
 - Create `TransformationService` as Effect Service
 - Implement all 6 transformations as pure functions
 - Create `HistoryService` using `Effect.Ref<Array<TransformResult>>`
@@ -237,6 +244,7 @@ pnpm test                       # ✓ All tests pass
 
 ### Requirements
 - Install `@effect-atom/atom-react`, `@tanstack/react-query`, `effect`, `@effect/platform`
+- Add @echo-lab/shared as workspace dependency (workspace:*)
 - Create atoms for: `inputText`, `selectedTransformation`, `isHistoryOpen`
 - Set up TanStack Query client with provider
 - Create typed API client using `@effect/platform` `HttpClient`
