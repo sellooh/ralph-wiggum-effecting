@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T12:00:00.000Z",
+  "last_updated": "2026-01-08T12:15:00.000Z",
   "current_phase": 2,
-  "current_task": "2.4",
+  "current_task": "2.5",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -587,7 +587,7 @@
         {
           "id": "2.4",
           "name": "Export services",
-          "status": "not_started",
+          "status": "complete",
           "description": "Create services index and verify types compile",
           "files_to_create": ["apps/api/src/services/index.ts"],
           "verifications": [
@@ -596,7 +596,7 @@
               "description": "Services compile without errors",
               "command": "cd apps/api && pnpm exec tsc --noEmit",
               "expected": "no type errors",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
