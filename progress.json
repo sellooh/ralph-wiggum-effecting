@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T22:00:00.000Z",
+  "last_updated": "2026-01-08T22:30:00.000Z",
   "current_phase": 0,
-  "current_task": "0.5",
+  "current_task": "0.6",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -147,7 +147,7 @@
         {
           "id": "0.5",
           "name": "Create apps/web package",
-          "status": "not_started",
+          "status": "complete",
           "description": "Initialize apps/web with package.json (type: module, placeholder build script until Vite is installed in Phase 4) and tsconfig.json extending base",
           "files_to_create": ["apps/web/package.json", "apps/web/tsconfig.json", "apps/web/src/main.tsx"],
           "verifications": [
@@ -156,14 +156,14 @@
               "description": "apps/web/package.json exists with name @echo-lab/web",
               "command": "grep name apps/web/package.json",
               "expected": "@echo-lab/web",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "0.5.2",
               "description": "apps/web/tsconfig.json extends base",
               "command": "grep extends apps/web/tsconfig.json",
               "expected": "../../tsconfig.base.json",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },

@@ -1,0 +1,11 @@
+{
+  "name": "@echo-lab/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Placeholder: Vite build will be configured in Phase 4'",
+    "dev": "echo 'Placeholder: Vite dev will be configured in Phase 4'",
+    "typecheck": "tsc --noEmit"
+  }
+}
