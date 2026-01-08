@@ -16,8 +16,7 @@ export const HistoryServiceLive = Layer.effect(
     const historyRef = yield* Ref.make<ReadonlyArray<TransformResult>>([]);
 
     return HistoryService.of({
-      add: (result) =>
-        Ref.update(historyRef, (history) => [...history, result]),
+      add: (result) => Ref.update(historyRef, (history) => [...history, result]),
 
       getAll: () => Ref.get(historyRef),
 
