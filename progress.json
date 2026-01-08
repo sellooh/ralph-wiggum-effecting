@@ -12,6 +12,22 @@
       "status": "not_started",
       "tasks": [
         {
+          "id": "0.0",
+          "name": "Create .gitignore",
+          "status": "not_started",
+          "description": "Root .gitignore for node_modules, dist, .env, and IDE files - MUST be created before any pnpm operations",
+          "files_to_create": [".gitignore"],
+          "verifications": [
+            {
+              "id": "0.0.1",
+              "description": ".gitignore contains essential patterns",
+              "command": "grep -E '(node_modules|dist|\\.env)' .gitignore",
+              "expected": "node_modules, dist, .env patterns present",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
           "id": "0.0.5",
           "name": "Set Node version requirements",
           "status": "not_started",
@@ -47,7 +63,7 @@
           "id": "0.2",
           "name": "Create root package.json",
           "status": "not_started",
-          "description": "Root package.json with workspace scripts (dev, build, typecheck)",
+          "description": "Root package.json with type: module, engines field for Node 20, and workspace scripts (dev, build, typecheck, lint, format, format:check, test, test:e2e) - scripts can be placeholders until tools are installed",
           "files_to_create": ["package.json"],
           "verifications": [
             {
@@ -55,6 +71,29 @@
               "description": "package.json has workspace scripts",
               "command": "grep -E '(dev|build|typecheck)' package.json",
               "expected": "shows dev, build, typecheck scripts",
+              "status": "not_started"
+            },
+            {
+              "id": "0.2.2",
+              "description": "package.json has ESM type",
+              "command": "grep '\"type\"' package.json",
+              "expected": "type: module",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "0.2.5",
+          "name": "Install TypeScript",
+          "status": "not_started",
+          "description": "Add TypeScript as root devDependency - required before any tsc --build commands can work",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "0.2.5.1",
+              "description": "TypeScript in devDependencies",
+              "command": "grep typescript package.json",
+              "expected": "typescript in devDependencies",
               "status": "not_started"
             }
           ]
@@ -86,7 +125,7 @@
           "id": "0.4",
           "name": "Create apps/api package",
           "status": "not_started",
-          "description": "Initialize apps/api with package.json (including build script: tsc --build) and tsconfig.json extending base with composite: true",
+          "description": "Initialize apps/api with package.json (type: module, build script: tsc --build) and tsconfig.json extending base with composite: true",
           "files_to_create": ["apps/api/package.json", "apps/api/tsconfig.json", "apps/api/src/index.ts"],
           "verifications": [
             {
@@ -109,7 +148,7 @@
           "id": "0.5",
           "name": "Create apps/web package",
           "status": "not_started",
-          "description": "Initialize apps/web with package.json (including build script: vite build) and tsconfig.json extending base",
+          "description": "Initialize apps/web with package.json (type: module, placeholder build script until Vite is installed in Phase 4) and tsconfig.json extending base",
           "files_to_create": ["apps/web/package.json", "apps/web/tsconfig.json", "apps/web/src/main.tsx"],
           "verifications": [
             {
@@ -132,7 +171,7 @@
           "id": "0.6",
           "name": "Create packages/shared package",
           "status": "not_started",
-          "description": "Initialize packages/shared with package.json (including build script: tsc --build) and tsconfig.json with composite: true",
+          "description": "Initialize packages/shared with package.json (type: module, build script: tsc --build) and tsconfig.json with composite: true",
           "files_to_create": ["packages/shared/package.json", "packages/shared/tsconfig.json", "packages/shared/src/index.ts"],
           "verifications": [
             {
@@ -304,22 +343,6 @@
               "description": "Playwright browsers installed",
               "command": "pnpm exec playwright install chromium",
               "expected": "chromium browser installed",
-              "status": "not_started"
-            }
-          ]
-        },
-        {
-          "id": "0.11",
-          "name": "Create .gitignore",
-          "status": "not_started",
-          "description": "Root .gitignore for node_modules, dist, .env, and IDE files",
-          "files_to_create": [".gitignore"],
-          "verifications": [
-            {
-              "id": "0.11.1",
-              "description": ".gitignore contains essential patterns",
-              "command": "grep -E '(node_modules|dist|\\.env)' .gitignore",
-              "expected": "node_modules, dist, .env patterns present",
               "status": "not_started"
             }
           ]
@@ -1502,7 +1525,8 @@
       "9. If all tasks in phase are complete, set phase status to 'complete'",
       "10. Update current_phase and current_task fields",
       "11. Save the updated JSON file",
-      "12. STOP - do not proceed to next task in same session"
+      "12. Commit with message: feat(phase-X): [Task ID] - [Task Name]",
+      "13. STOP - do not proceed to next task in same session"
     ],
     "status_values": {
       "not_started": "Work has not begun",
