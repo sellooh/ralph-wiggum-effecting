@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T12:06:00.000Z",
-  "current_phase": 8,
-  "current_task": "8.5",
+  "last_updated": "2026-01-08T12:10:00.000Z",
+  "current_phase": 9,
+  "current_task": "9.1",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -1268,7 +1268,7 @@
     {
       "id": 8,
       "name": "History Feature",
-      "status": "in_progress",
+      "status": "complete",
       "tasks": [
         {
           "id": "8.1",
@@ -1337,7 +1337,7 @@
         {
           "id": "8.5",
           "name": "Wire history panel to App",
-          "status": "not_started",
+          "status": "complete",
           "description": "Add HistoryPanel to App.tsx, toggle via isHistoryOpen atom",
           "files_to_create": [],
           "verifications": [
@@ -1346,35 +1346,35 @@
               "description": "HistoryPanel in App",
               "command": "grep 'HistoryPanel' apps/web/src/App.tsx",
               "expected": "HistoryPanel import and usage",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "8.5.2",
               "description": "Toggle uses isHistoryOpen atom",
               "command": "grep 'isHistoryOpen' apps/web/src/App.tsx",
               "expected": "atom controls visibility",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "8.5.3",
               "description": "Linting passes",
               "command": "pnpm lint",
               "expected": "exit code 0",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "8.5.4",
               "description": "Formatting is correct",
               "command": "pnpm format:check",
               "expected": "exit code 0",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "8.5.5",
               "description": "All tests pass",
               "command": "pnpm test",
               "expected": "exit code 0",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         }
