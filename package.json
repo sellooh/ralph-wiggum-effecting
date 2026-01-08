@@ -15,5 +15,8 @@
     "format:check": "echo 'format:check script placeholder'",
     "test": "echo 'test script placeholder'",
     "test:e2e": "echo 'test:e2e script placeholder'"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
   }
 }
