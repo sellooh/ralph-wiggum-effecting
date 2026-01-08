@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-09T04:41:00.000Z",
+  "last_updated": "2026-01-09T05:00:00.000Z",
   "current_phase": 2,
-  "current_task": "2.1",
+  "current_task": "2.2",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -506,12 +506,12 @@
     {
       "id": 2,
       "name": "Backend Services (Pure Logic)",
-      "status": "not_started",
+      "status": "in_progress",
       "tasks": [
         {
           "id": "2.1",
           "name": "Install Effect dependencies for API",
-          "status": "not_started",
+          "status": "complete",
           "description": "Add effect, @effect/platform, @effect/platform-node, @types/node, and @echo-lab/shared (workspace:*) to apps/api",
           "files_to_create": [],
           "verifications": [
@@ -520,21 +520,21 @@
               "description": "Effect packages installed in api",
               "command": "grep -E '@effect/platform' apps/api/package.json",
               "expected": "platform packages listed",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "2.1.2",
               "description": "Shared package linked as workspace dependency",
               "command": "grep '@echo-lab/shared' apps/api/package.json",
               "expected": "@echo-lab/shared with workspace:* version",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "2.1.3",
               "description": "@types/node installed for Node APIs",
               "command": "grep '@types/node' apps/api/package.json",
               "expected": "@types/node in devDependencies",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },

@@ -7,5 +7,14 @@
     "build": "tsc --build",
     "dev": "tsx watch src/index.ts",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@echo-lab/shared": "workspace:*",
+    "@effect/platform": "^0.94.1",
+    "@effect/platform-node": "^0.104.0",
+    "effect": "^3.19.14"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3"
   }
 }
