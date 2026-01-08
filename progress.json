@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T14:01:00.000Z",
-  "current_phase": 3,
-  "current_task": "3.5",
+  "last_updated": "2026-01-08T14:05:30.000Z",
+  "current_phase": 4,
+  "current_task": "4.1",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -642,7 +642,7 @@
     {
       "id": 3,
       "name": "Backend HTTP API + OpenAPI",
-      "status": "in_progress",
+      "status": "complete",
       "tasks": [
         {
           "id": "3.1",
@@ -739,7 +739,7 @@
         {
           "id": "3.5",
           "name": "Add CORS for frontend",
-          "status": "not_started",
+          "status": "complete",
           "description": "Enable CORS for localhost:5173",
           "files_to_create": [],
           "verifications": [
@@ -748,28 +748,28 @@
               "description": "CORS headers present (requires server from 3.4.1)",
               "command": "curl -s -I -X OPTIONS http://localhost:3001/api/transform -H 'Origin: http://localhost:5173' | grep -i 'access-control'",
               "expected": "Access-Control-Allow-Origin header present",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "3.5.2",
               "description": "Linting passes",
               "command": "pnpm lint",
               "expected": "exit code 0",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "3.5.3",
               "description": "Formatting is correct",
               "command": "pnpm format:check",
               "expected": "exit code 0",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "3.5.4",
               "description": "All tests pass",
               "command": "pnpm test",
               "expected": "exit code 0",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         }

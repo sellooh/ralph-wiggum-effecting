@@ -16,10 +16,19 @@ const PORT = 3001;
  * - All API endpoints defined in EchoLabApi
  * - Scalar OpenAPI documentation at /docs
  * - Request logging middleware
+ * - CORS support for frontend at localhost:5173
  */
 const ServerLive = HttpApiBuilder.serve(HttpMiddleware.logger).pipe(
   Layer.provide(HttpApiScalar.layer({ path: "/docs" })),
   Layer.provide(HttpApiBuilder.middlewareOpenApi({ path: "/openapi.json" })),
+  Layer.provide(
+    HttpApiBuilder.middlewareCors({
+      allowedOrigins: ["http://localhost:5173"],
+      allowedMethods: ["GET", "POST", "DELETE", "OPTIONS"],
+      allowedHeaders: ["Content-Type"],
+      credentials: false,
+    }),
+  ),
   Layer.provide(ApiLive),
   HttpServer.withLogAddress,
   Layer.provide(NodeHttpServer.layer(createServer, { port: PORT })),

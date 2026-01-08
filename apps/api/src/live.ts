@@ -2,10 +2,7 @@ import { HttpApiBuilder } from "@effect/platform";
 import { Layer } from "effect";
 import { EchoLabApi } from "./api.js";
 import { TransformGroupHandlers } from "./handlers.js";
-import {
-  HistoryServiceLive,
-  TransformationServiceLive,
-} from "./services/index.js";
+import { HistoryServiceLive, TransformationServiceLive } from "./services/index.js";
 
 /**
  * Services Layer - Combines all application service layers
