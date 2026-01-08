@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T22:00:00.000Z",
+  "last_updated": "2026-01-08T22:30:00.000Z",
   "current_phase": 1,
-  "current_task": "1.4",
+  "current_task": "1.5",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -435,7 +435,7 @@
         {
           "id": "1.4",
           "name": "Define typed errors",
-          "status": "not_started",
+          "status": "complete",
           "description": "Create InvalidInput and TransformationFailed error schemas with _tag discriminator",
           "files_to_create": ["packages/shared/src/errors.ts"],
           "verifications": [
@@ -444,7 +444,7 @@
               "description": "Error schemas have _tag field",
               "command": "grep '_tag' packages/shared/src/errors.ts",
               "expected": "_tag field present in error definitions",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
