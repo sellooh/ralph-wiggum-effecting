@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T19:14:00.000Z",
+  "last_updated": "2026-01-08T19:16:00.000Z",
   "current_phase": 4,
-  "current_task": "4.4",
+  "current_task": "4.5",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -838,7 +838,7 @@
         {
           "id": "4.4",
           "name": "Add shadcn components via CLI",
-          "status": "not_started",
+          "status": "complete",
           "description": "Run npx shadcn@latest add button textarea select card toast separator",
           "files_to_create": ["apps/web/src/components/ui/button.tsx", "apps/web/src/components/ui/card.tsx"],
           "verifications": [
@@ -847,14 +847,14 @@
               "description": "Button component exists",
               "command": "test -f apps/web/src/components/ui/button.tsx && echo 'exists'",
               "expected": "exists",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "4.4.2",
               "description": "Card component exists",
               "command": "test -f apps/web/src/components/ui/card.tsx && echo 'exists'",
               "expected": "exists",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
