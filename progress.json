@@ -1,10 +1,10 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T12:23:30.000Z",
-  "current_phase": 9,
-  "current_task": "9.6",
-  "overall_status": "complete",
+  "last_updated": "2026-01-08T14:30:00.000Z",
+  "current_phase": 10,
+  "current_task": "10.2",
+  "overall_status": "in_progress",
   "phases": [
     {
       "id": 0,
@@ -1506,6 +1506,112 @@
               "command": "pnpm test",
               "expected": "exit code 0",
               "status": "complete"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "E2E Testing",
+      "status": "in_progress",
+      "tasks": [
+        {
+          "id": "10.1",
+          "name": "Write transform flow e2e tests",
+          "status": "complete",
+          "description": "Create e2e/transform.spec.ts testing all 6 transformation types, result display, and keyboard shortcut (Cmd/Ctrl+Enter)",
+          "files_to_create": ["e2e/transform.spec.ts"],
+          "verifications": [
+            {
+              "id": "10.1.1",
+              "description": "Transform e2e test file exists",
+              "command": "test -f e2e/transform.spec.ts && echo 'exists'",
+              "expected": "exists",
+              "status": "complete"
+            },
+            {
+              "id": "10.1.2",
+              "description": "Transform tests pass",
+              "command": "pnpm test:e2e e2e/transform.spec.ts",
+              "expected": "all tests pass",
+              "status": "complete"
+            }
+          ]
+        },
+        {
+          "id": "10.2",
+          "name": "Write history feature e2e tests",
+          "status": "not_started",
+          "description": "Create e2e/history.spec.ts testing history panel open/close, transformations appearing in history, and clear history functionality",
+          "files_to_create": ["e2e/history.spec.ts"],
+          "verifications": [
+            {
+              "id": "10.2.1",
+              "description": "History e2e test file exists",
+              "command": "test -f e2e/history.spec.ts && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            },
+            {
+              "id": "10.2.2",
+              "description": "History tests pass",
+              "command": "pnpm test:e2e e2e/history.spec.ts",
+              "expected": "all tests pass",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "10.3",
+          "name": "Write error handling e2e tests",
+          "status": "not_started",
+          "description": "Create e2e/errors.spec.ts testing invalid base64 input error toast and empty input handling",
+          "files_to_create": ["e2e/errors.spec.ts"],
+          "verifications": [
+            {
+              "id": "10.3.1",
+              "description": "Error e2e test file exists",
+              "command": "test -f e2e/errors.spec.ts && echo 'exists'",
+              "expected": "exists",
+              "status": "not_started"
+            },
+            {
+              "id": "10.3.2",
+              "description": "Error tests pass",
+              "command": "pnpm test:e2e e2e/errors.spec.ts",
+              "expected": "all tests pass",
+              "status": "not_started"
+            }
+          ]
+        },
+        {
+          "id": "10.4",
+          "name": "Final e2e verification",
+          "status": "not_started",
+          "description": "Run all e2e tests together and verify full test suite passes",
+          "files_to_create": [],
+          "verifications": [
+            {
+              "id": "10.4.1",
+              "description": "All e2e tests pass",
+              "command": "pnpm test:e2e",
+              "expected": "exit code 0, all tests pass",
+              "status": "not_started"
+            },
+            {
+              "id": "10.4.2",
+              "description": "Linting passes",
+              "command": "pnpm lint",
+              "expected": "exit code 0",
+              "status": "not_started"
+            },
+            {
+              "id": "10.4.3",
+              "description": "Formatting is correct",
+              "command": "pnpm format:check",
+              "expected": "exit code 0",
+              "status": "not_started"
             }
           ]
         }
