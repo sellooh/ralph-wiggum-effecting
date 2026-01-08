@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T22:30:00.000Z",
+  "last_updated": "2026-01-08T23:00:00.000Z",
   "current_phase": 1,
-  "current_task": "1.5",
+  "current_task": "1.6",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -451,7 +451,7 @@
         {
           "id": "1.5",
           "name": "Export from index",
-          "status": "not_started",
+          "status": "complete",
           "description": "Re-export all schemas and types from packages/shared/src/index.ts",
           "files_to_create": [],
           "verifications": [
@@ -460,14 +460,14 @@
               "description": "Package builds successfully",
               "command": "cd packages/shared && pnpm build",
               "expected": "build completes without errors",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "1.5.2",
               "description": "Types are importable",
               "command": "cd packages/shared && pnpm exec tsc --noEmit",
               "expected": "no type errors",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
