@@ -12,5 +12,8 @@
   "scripts": {
     "build": "tsc --build",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "effect": "^3.19.14"
   }
 }
