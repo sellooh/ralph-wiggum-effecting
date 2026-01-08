@@ -92,7 +92,11 @@ export function TransformCard() {
           </SelectContent>
         </Select>
 
-        <Button onClick={handleTransform} disabled={!inputText.trim() || transform.isPending}>
+        <Button
+          onClick={handleTransform}
+          disabled={!inputText.trim() || transform.isPending}
+          className="transition-all duration-200 active:scale-95"
+        >
           {transform.isPending ? "Transforming..." : "Transform"}
         </Button>
       </div>
@@ -102,7 +106,7 @@ export function TransformCard() {
       )}
 
       {transform.isSuccess && transform.data && (
-        <div className="rounded-md border bg-muted/50 p-4">
+        <div className="animate-in fade-in slide-in-from-bottom-2 duration-300 rounded-md border bg-muted/50 p-4">
           <p className="text-sm text-muted-foreground mb-1">Result:</p>
           <p className="font-mono text-sm break-all">{transform.data.result}</p>
         </div>

@@ -23,7 +23,7 @@ export function HistoryPanel() {
         variant="outline"
         size="icon"
         onClick={() => setIsOpen(true)}
-        className="fixed top-4 right-4"
+        className="fixed top-4 right-4 transition-all duration-200 hover:scale-105 active:scale-95"
       >
         <History className="h-4 w-4" />
         <span className="sr-only">Show history</span>
@@ -34,7 +34,7 @@ export function HistoryPanel() {
   const items = history.data?.items ?? [];
 
   return (
-    <div className="fixed top-0 right-0 h-full w-80 border-l bg-background shadow-lg">
+    <div className="fixed top-0 right-0 h-full w-80 border-l bg-background shadow-lg animate-in slide-in-from-right duration-300">
       <div className="flex items-center justify-between p-4 border-b">
         <div className="flex items-center gap-2">
           <History className="h-4 w-4" />

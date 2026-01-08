@@ -26,11 +26,15 @@ export function CopyButton({ text, className }: CopyButtonProps) {
     <Button
       variant="ghost"
       size="icon-sm"
-      className={className}
+      className={`group transition-all duration-200 active:scale-95 ${className ?? ""}`}
       onClick={handleCopy}
       aria-label={copied ? "Copied" : "Copy to clipboard"}
     >
-      {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
+      {copied ? (
+        <Check className="size-4 text-green-500 animate-in zoom-in duration-200" />
+      ) : (
+        <Copy className="size-4 transition-transform duration-200 group-hover:scale-110" />
+      )}
     </Button>
   );
 }

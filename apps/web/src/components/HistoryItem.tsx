@@ -46,7 +46,7 @@ interface HistoryItemProps {
  */
 export function HistoryItem({ item }: HistoryItemProps) {
   return (
-    <div className="space-y-2 py-3">
+    <div className="space-y-2 py-3 animate-in fade-in slide-in-from-right-2 duration-300">
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
           {getTransformationLabel(item.transformation)}
