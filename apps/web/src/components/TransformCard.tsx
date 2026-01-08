@@ -75,12 +75,12 @@ export function TransformCard() {
         className="min-h-32 resize-none"
       />
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
         <Select
           value={selectedTransformation}
           onValueChange={(value) => setSelectedTransformation(value as TransformationType)}
         >
-          <SelectTrigger className="w-48">
+          <SelectTrigger className="w-full sm:w-48">
             <SelectValue placeholder="Select transformation" />
           </SelectTrigger>
           <SelectContent>
@@ -95,7 +95,7 @@ export function TransformCard() {
         <Button
           onClick={handleTransform}
           disabled={!inputText.trim() || transform.isPending}
-          className="transition-all duration-200 active:scale-95"
+          className="w-full sm:w-auto transition-all duration-200 active:scale-95"
         >
           {transform.isPending ? "Transforming..." : "Transform"}
         </Button>

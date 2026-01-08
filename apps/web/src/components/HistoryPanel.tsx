@@ -34,7 +34,7 @@ export function HistoryPanel() {
   const items = history.data?.items ?? [];
 
   return (
-    <div className="fixed top-0 right-0 h-full w-80 border-l bg-background shadow-lg animate-in slide-in-from-right duration-300">
+    <div className="fixed top-0 right-0 h-full w-full sm:w-80 border-l bg-background shadow-lg animate-in slide-in-from-right duration-300">
       <div className="flex items-center justify-between p-4 border-b">
         <div className="flex items-center gap-2">
           <History className="h-4 w-4" />

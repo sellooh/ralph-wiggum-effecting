@@ -47,11 +47,13 @@ interface HistoryItemProps {
 export function HistoryItem({ item }: HistoryItemProps) {
   return (
     <div className="space-y-2 py-3 animate-in fade-in slide-in-from-right-2 duration-300">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-1 sm:gap-2">
         <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
           {getTransformationLabel(item.transformation)}
         </span>
-        <span className="text-xs text-muted-foreground">{formatTimestamp(item.timestamp)}</span>
+        <span className="text-xs text-muted-foreground truncate">
+          {formatTimestamp(item.timestamp)}
+        </span>
       </div>
       <div className="space-y-1">
         <p className="text-xs text-muted-foreground">Original:</p>
