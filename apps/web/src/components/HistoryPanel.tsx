@@ -1,10 +1,33 @@
 import { useAtom } from "@effect-atom/atom-react";
 import { History, X, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { isHistoryOpenAtom } from "@/atoms";
 import { useHistory, useClearHistory } from "@/hooks/useHistory";
 import { HistoryItem } from "./HistoryItem";
 import { EmptyHistory } from "./EmptyHistory";
+
+/**
+ * HistoryItemSkeleton - Loading placeholder for history items
+ */
+function HistoryItemSkeleton() {
+  return (
+    <div className="space-y-2 py-3">
+      <div className="flex items-center justify-between gap-2">
+        <Skeleton className="h-5 w-20" />
+        <Skeleton className="h-4 w-24" />
+      </div>
+      <div className="space-y-1">
+        <Skeleton className="h-3 w-12" />
+        <Skeleton className="h-5 w-full" />
+      </div>
+      <div className="space-y-1">
+        <Skeleton className="h-3 w-10" />
+        <Skeleton className="h-5 w-3/4" />
+      </div>
+    </div>
+  );
+}
 
 /**
  * HistoryPanel - Sidebar/collapsible section showing transformation history
@@ -62,8 +85,10 @@ export function HistoryPanel() {
 
       <div className="p-4 overflow-y-auto h-[calc(100%-65px)]">
         {history.isLoading ? (
-          <div className="flex items-center justify-center py-8">
-            <p className="text-sm text-muted-foreground">Loading history...</p>
+          <div className="divide-y">
+            <HistoryItemSkeleton />
+            <HistoryItemSkeleton />
+            <HistoryItemSkeleton />
           </div>
         ) : history.isError ? (
           <div className="flex items-center justify-center py-8">
