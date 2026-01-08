@@ -13,11 +13,12 @@
     "lint": "biome lint .",
     "format": "biome format --write .",
     "format:check": "biome format .",
-    "test": "echo 'test script placeholder'",
+    "test": "vitest run",
     "test:e2e": "echo 'test:e2e script placeholder'"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.16"
   }
 }
