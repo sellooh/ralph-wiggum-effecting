@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T00:00:00.000Z",
+  "last_updated": "2026-01-08T12:00:00.000Z",
   "current_phase": 0,
-  "current_task": "0.0.5",
+  "current_task": "0.1",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -30,7 +30,7 @@
         {
           "id": "0.0.5",
           "name": "Set Node version requirements",
-          "status": "not_started",
+          "status": "complete",
           "description": "Create .nvmrc with Node 20 and add engines field to root package.json",
           "files_to_create": [".nvmrc"],
           "verifications": [
@@ -39,7 +39,7 @@
               "description": ".nvmrc specifies Node 20",
               "command": "cat .nvmrc",
               "expected": "20 or v20.x",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
