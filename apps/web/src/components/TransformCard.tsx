@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useAtom } from "@effect-atom/atom-react";
 import type { TransformationType } from "@echo-lab/shared";
 import { toast } from "sonner";
@@ -58,13 +58,24 @@ export function TransformCard() {
     }
   }, [transform.isError, transform.error]);
 
-  const handleTransform = () => {
-    if (!inputText.trim()) return;
+  const handleTransform = useCallback(() => {
+    if (!inputText.trim() || transform.isPending) return;
     transform.mutate({
       text: inputText,
       transformation: selectedTransformation,
     });
-  };
+  }, [inputText, selectedTransformation, transform]);
+
+  // Handle Cmd/Ctrl + Enter keyboard shortcut
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "Enter") {
+        e.preventDefault();
+        handleTransform();
+      }
+    },
+    [handleTransform],
+  );
 
   return (
     <div className="space-y-4">
@@ -72,6 +83,7 @@ export function TransformCard() {
         placeholder="Enter text to transform..."
         value={inputText}
         onChange={(e) => setInputText(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="min-h-32 resize-none"
       />
 
