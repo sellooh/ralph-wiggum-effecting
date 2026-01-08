@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T10:52:00.000Z",
+  "last_updated": "2026-01-08T11:15:00.000Z",
   "current_phase": 3,
-  "current_task": "3.1",
+  "current_task": "3.2",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -642,12 +642,12 @@
     {
       "id": 3,
       "name": "Backend HTTP API + OpenAPI",
-      "status": "not_started",
+      "status": "in_progress",
       "tasks": [
         {
           "id": "3.1",
           "name": "Define HTTP API schema",
-          "status": "not_started",
+          "status": "complete",
           "description": "Create HttpApi with transform group: POST /transform, GET /history, DELETE /history",
           "files_to_create": ["apps/api/src/api.ts"],
           "verifications": [
@@ -656,14 +656,14 @@
               "description": "API definition uses HttpApi.make",
               "command": "grep 'HttpApi' apps/api/src/api.ts",
               "expected": "HttpApi usage found",
-              "status": "not_started"
+              "status": "complete"
             },
             {
               "id": "3.1.2",
               "description": "Three endpoints defined",
               "command": "grep -E '(post|get|delete)' apps/api/src/api.ts | wc -l",
               "expected": "at least 3 endpoint definitions",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
