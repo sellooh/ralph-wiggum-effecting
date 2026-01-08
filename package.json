@@ -1,0 +1,19 @@
+{
+  "name": "echo-lab",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "dev": "echo 'dev script placeholder'",
+    "build": "echo 'build script placeholder'",
+    "typecheck": "echo 'typecheck script placeholder'",
+    "lint": "echo 'lint script placeholder'",
+    "format": "echo 'format script placeholder'",
+    "format:check": "echo 'format:check script placeholder'",
+    "test": "echo 'test script placeholder'",
+    "test:e2e": "echo 'test:e2e script placeholder'"
+  }
+}
