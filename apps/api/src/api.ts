@@ -51,9 +51,7 @@ export class TransformGroup extends HttpApiGroup.make("transform")
       .addSuccess(TransformResultJson)
       .addError(ErrorResponse, { status: 400 }),
   )
-  .add(
-    HttpApiEndpoint.get("getHistory", "/transform/history").addSuccess(HistoryResponse),
-  )
+  .add(HttpApiEndpoint.get("getHistory", "/transform/history").addSuccess(HistoryResponse))
   .add(
     HttpApiEndpoint.del("clearHistory", "/transform/history").addSuccess(
       Schema.Struct({ message: Schema.String }),
