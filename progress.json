@@ -1,9 +1,9 @@
 {
   "project": "echo-lab",
   "version": "1.0.0",
-  "last_updated": "2026-01-08T12:15:00.000Z",
+  "last_updated": "2026-01-08T12:06:00.000Z",
   "current_phase": 8,
-  "current_task": "8.4",
+  "current_task": "8.5",
   "overall_status": "in_progress",
   "phases": [
     {
@@ -1321,7 +1321,7 @@
         {
           "id": "8.4",
           "name": "Add clear history functionality",
-          "status": "not_started",
+          "status": "complete",
           "description": "Clear button that calls DELETE /api/transform/history",
           "files_to_create": [],
           "verifications": [
@@ -1330,7 +1330,7 @@
               "description": "Clear button in HistoryPanel",
               "command": "grep -E '(clear|Clear|DELETE)' apps/web/src/components/HistoryPanel.tsx",
               "expected": "clear functionality present",
-              "status": "not_started"
+              "status": "complete"
             }
           ]
         },
