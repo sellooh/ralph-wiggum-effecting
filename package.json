@@ -7,9 +7,9 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "dev": "echo 'dev script placeholder'",
-    "build": "echo 'build script placeholder'",
-    "typecheck": "echo 'typecheck script placeholder'",
+    "dev": "pnpm --parallel -r dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "format:check": "biome format .",

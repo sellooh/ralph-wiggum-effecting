@@ -1,6 +1,6 @@
 import { Schema } from "effect";
 import { describe, expect, it } from "vitest";
-import { TransformRequest, TransformResult, TransformationType } from "./schemas";
+import { TransformRequest, TransformResult, TransformationType } from "./schemas.js";
 
 describe("TransformationType", () => {
   it("should accept valid transformation types", () => {
@@ -42,7 +42,7 @@ describe("TransformRequest", () => {
   it("should accept empty text", () => {
     const request = {
       text: "",
-      transformation: "lowercase",
+      transformation: "lowercase" as const,
     };
 
     const result = Schema.decodeUnknownSync(TransformRequest)(request);
@@ -61,8 +61,8 @@ describe("TransformRequest", () => {
 
     for (const transformation of types) {
       const request = { text: "test", transformation };
-      const result = Schema.decodeUnknownSync(TransformRequest)(request);
-      expect(result.transformation).toBe(transformation);
+      const decoded = Schema.decodeUnknownSync(TransformRequest)(request);
+      expect(decoded.transformation).toBe(transformation);
     }
   });
 
@@ -120,8 +120,8 @@ describe("TransformResult", () => {
         transformation,
         timestamp: new Date(),
       };
-      const result = Schema.decodeUnknownSync(TransformResult)(validResult);
-      expect(result.transformation).toBe(transformation);
+      const decoded = Schema.decodeUnknownSync(TransformResult)(validResult);
+      expect(decoded.transformation).toBe(transformation);
     }
   });
 
