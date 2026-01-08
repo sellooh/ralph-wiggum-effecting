@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import { useAtom } from "@effect-atom/atom-react";
 import type { TransformationType } from "@echo-lab/shared";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -11,6 +13,28 @@ import {
 } from "@/components/ui/select";
 import { inputTextAtom, selectedTransformationAtom } from "@/atoms";
 import { useTransform } from "@/hooks/useTransform";
+
+/**
+ * Get a user-friendly error message based on error type
+ */
+function getErrorMessage(error: unknown): string {
+  if (error && typeof error === "object") {
+    // Check for typed errors with _tag discriminator
+    if ("_tag" in error) {
+      switch (error._tag) {
+        case "InvalidInput":
+          return `Invalid input: ${"message" in error ? error.message : "Please check your input"}`;
+        case "TransformationFailed":
+          return `Transformation failed: ${"message" in error ? error.message : "Unable to process"}`;
+      }
+    }
+    // Fall back to message property if available
+    if ("message" in error && typeof error.message === "string") {
+      return error.message;
+    }
+  }
+  return "An unexpected error occurred";
+}
 
 const transformationOptions: { value: TransformationType; label: string }[] = [
   { value: "uppercase", label: "Uppercase" },
@@ -25,6 +49,14 @@ export function TransformCard() {
   const [inputText, setInputText] = useAtom(inputTextAtom);
   const [selectedTransformation, setSelectedTransformation] = useAtom(selectedTransformationAtom);
   const transform = useTransform();
+
+  // Show toast notification when an error occurs
+  useEffect(() => {
+    if (transform.isError && transform.error) {
+      const errorMessage = getErrorMessage(transform.error);
+      toast.error(errorMessage);
+    }
+  }, [transform.isError, transform.error]);
 
   const handleTransform = () => {
     if (!inputText.trim()) return;
@@ -65,10 +97,8 @@ export function TransformCard() {
         </Button>
       </div>
 
-      {transform.isError && (
-        <p className="text-sm text-destructive">
-          Error: {transform.error?.message || "Something went wrong"}
-        </p>
+      {transform.isError && transform.error && (
+        <p className="text-sm text-destructive">{getErrorMessage(transform.error)}</p>
       )}
 
       {transform.isSuccess && transform.data && (
