@@ -1,5 +1,7 @@
 # Ralph - Autonomous Agent Loop
 
+This is an implementation of the **Ralph method** by [Geoffrey Huntley](https://ghuntley.com/ralph/).
+
 Ralph is an experiment in autonomous code generation. It runs Claude Code CLI in a loop, building a complete project one task at a time from a structured task manifest.
 
 ## How It Works
